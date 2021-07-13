@@ -242,7 +242,7 @@ if __name__ == "__main__":
     getSeverityDict()
     getDescription()
     getprecautionDict()
-    app.run()
+    app.run(debug=True, use_reloader=True)
 	
 	
 	
