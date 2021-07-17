@@ -11,8 +11,9 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 from flask import Flask, render_template, request
 import random
 l=[]
-app = Flask(_name_)
+app = Flask(__name__)
 app.config["CACHE_TYPE"]="null"
+
 ip={}
 training = pd.read_csv('Training.csv')
 testing= pd.read_csv('Testing.csv')
