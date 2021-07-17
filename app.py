@@ -11,7 +11,7 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 from flask import Flask, render_template, request
 import random
 l=[]
-app = Flask(__name__)
+app = Flask(_name_)
 app.config["CACHE_TYPE"]="null"
 ip={}
 training = pd.read_csv('Training.csv')
@@ -135,13 +135,10 @@ def print_disease(node):
     disease = le.inverse_transform(val[0])
     return disease
 	
-@app.route("/")
-def index():
-    return "Hello this is the new version of HygeAI!"
 
 @app.route("/get")
 def get_bot_response():
-
+	       
     userText = request.args.get('msg')
     if "Please enter the symptom you are facing" not in l:
         l.append("Please enter the symptom you are facing")
@@ -168,7 +165,7 @@ def get_bot_response():
         shrad=""
         if conf==1:
             for num,it in enumerate(cnf_dis):
-                shrad+="/n"+str(num)+")"+it+" "
+                shrad+="\n"+str(num)+")"+it+" "
             if num!=0:
                 if "Select the one that you meant" not in l:
                     l.append("Select the one that you meant")
@@ -206,28 +203,25 @@ def get_bot_response():
         inp=""
         if syms not in ip.keys():
             ip[syms]="done"
-            return "Are you experiencing any "+syms+" ? : "+"/n provide proper answers i.e. (yes/no) : "
+            return "Are you experiencing any "+syms+" ? : "+"\nProvide proper answers i.e. (yes/no) : "
         else:
             continue
 	
-	ans=['no','yes']
         inp=request.args.get('msg')
-        while inp.lower() not in ans:
-	   return "provide proper answers i.e. (yes/no) : "	
-	   inp=request.args.get('msg')
-
+        if(inp.lower()!="yes" or inp.lower()!="no"):
+            print("Provide proper answers i.e. (yes/no) : ")
         if(inp.lower()=="yes"):
-           symptoms_exp.append(syms)
-		
+            symptoms_exp.append(syms)
+	
     second_prediction=sec_predict(symptoms_exp)
     calc_condition(symptoms_exp,num_days)
     precution_list=precautionDictionary[present_disease[0]]
     for  i,j in enumerate(precution_list):
-        shrad+=str(i+1)+")"+j+"/n"
+        shrad+=str(i+1)+")"+j+"\n"
     if(present_disease[0]==second_prediction[0]):
-        return "You may have "+ present_disease[0]+"/n"+description_list[present_disease[0]]+"/nTake following measures : /n"+shrad
+        return "You may have "+ present_disease[0]+"\n"+description_list[present_disease[0]]+" Take following measures : "+shrad
     else:
-        return "You may have "+ present_disease[0]+ "or "+ second_prediction[0]+"/n"+description_list[present_disease[0]]+"/n"+description_list[second_prediction[0]]+"/nTake following measures : /n"+shrad          
+        return "You may have "+ present_disease[0]+ "or "+ second_prediction[0]+"\n"+description_list[present_disease[0]]+"\n"+description_list[second_prediction[0]]+"\nTake following measures : \n"+shrad          
 node=0
 
 def recurse(n, depth,tree_,feature_name,disease_input):
@@ -246,14 +240,8 @@ def recurse(n, depth,tree_,feature_name,disease_input):
         else:
             symptoms_present.append(name)
             recurse(tree_.children_right[globals()['node']], depth + 1,tree_,feature_name,disease_input)
-if __name__ == "__main__":
+if _name_ == "_main_":
     getSeverityDict()
     getDescription()
     getprecautionDict()
     app.run(debug=True, use_reloader=True)
-	
-	
-	
-	
-	
-	
