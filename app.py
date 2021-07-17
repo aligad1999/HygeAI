@@ -214,7 +214,8 @@ def get_bot_response():
 	
         inp=request.args.get('msg')
         while inp.lower() not in ans:
-	   inp = input("provide proper answers i.e. (yes/no)")
+	   inp=request.args.get('msg')
+	   return "provide proper answers i.e. (yes/no) : "	
         if(inp.lower()=="yes"):
            symptoms_exp.append(syms)
 		
