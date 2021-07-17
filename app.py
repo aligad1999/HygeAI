@@ -168,7 +168,7 @@ def get_bot_response():
         shrad=""
         if conf==1:
             for num,it in enumerate(cnf_dis):
-                shrad+="<br>"+str(num)+")"+it+" "
+                shrad+="/n"+str(num)+")"+it+" "
             if num!=0:
                 if "Select the one that you meant" not in l:
                     l.append("Select the one that you meant")
@@ -206,23 +206,26 @@ def get_bot_response():
         inp=""
         if syms not in ip.keys():
             ip[syms]="done"
-            return "Are you experiencing any "+syms+" ? : "+"<br>provide proper answers i.e. (yes/no) : "
+            return "Are you experiencing any "+syms+" ? : "+"/n provide proper answers i.e. (yes/no) : "
         else:
             continue
+	
+	ans=['no','yes']
         inp=request.args.get('msg')
-        if(inp.lower()!="yes" or inp.lower()!="no"):
-            print("Provide proper answers i.e. (yes/no) : ")
-        if(inp.lower()=="yes"):
-            symptoms_exp.append(syms)
+        while inp.lower() not in ans:
+	    inp = input("provide proper answers i.e. (yes/no)")
+            if(inp.lower()=="yes"):
+            	symptoms_exp.append(syms)
+		
     second_prediction=sec_predict(symptoms_exp)
     calc_condition(symptoms_exp,num_days)
     precution_list=precautionDictionary[present_disease[0]]
     for  i,j in enumerate(precution_list):
-        shrad+=str(i+1)+")"+j+"<br>"
+        shrad+=str(i+1)+")"+j+"/n"
     if(present_disease[0]==second_prediction[0]):
-        return "You may have "+ present_disease[0]+"<br>"+description_list[present_disease[0]]+"<br>Take following measures : <br>"+shrad
+        return "You may have "+ present_disease[0]+"/n"+description_list[present_disease[0]]+"/nTake following measures : /n"+shrad
     else:
-        return "You may have "+ present_disease[0]+ "or "+ second_prediction[0]+"<br>"+description_list[present_disease[0]]+"<br>"+description_list[second_prediction[0]]+"<br>Take following measures : <br>"+shrad          
+        return "You may have "+ present_disease[0]+ "or "+ second_prediction[0]+"/n"+description_list[present_disease[0]]+"/n"+description_list[second_prediction[0]]+"/nTake following measures : /n"+shrad          
 node=0
 
 def recurse(n, depth,tree_,feature_name,disease_input):
