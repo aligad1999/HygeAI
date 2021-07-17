@@ -204,18 +204,18 @@ def get_bot_response():
     vir=list(symptoms_given)       
     for syms in list(symptoms_given):
         inp=""
-	ans=['no','yes']
         if syms not in ip.keys():
             ip[syms]="done"
             return "Are you experiencing any "+syms+" ? : "+"/n provide proper answers i.e. (yes/no) : "
         else:
             continue
 	
-	
+	ans=['no','yes']
         inp=request.args.get('msg')
         while inp.lower() not in ans:
-	   inp=request.args.get('msg')
 	   return "provide proper answers i.e. (yes/no) : "	
+	   inp=request.args.get('msg')
+
         if(inp.lower()=="yes"):
            symptoms_exp.append(syms)
 		
