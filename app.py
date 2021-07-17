@@ -240,7 +240,7 @@ def recurse(n, depth,tree_,feature_name,disease_input):
         else:
             symptoms_present.append(name)
             recurse(tree_.children_right[globals()['node']], depth + 1,tree_,feature_name,disease_input)
-if _name_ == "_main_":
+if __name__=='__main__':
     getSeverityDict()
     getDescription()
     getprecautionDict()
