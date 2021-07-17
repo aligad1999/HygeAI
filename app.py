@@ -53,7 +53,7 @@ def readn(nstr):
 severityDictionary=dict()
 description_list = dict()
 precautionDictionary=dict()
-
+precution_list=[]
 symptoms_dict = {}
 
 for index, symptom in enumerate(x):
