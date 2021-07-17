@@ -204,18 +204,19 @@ def get_bot_response():
     vir=list(symptoms_given)       
     for syms in list(symptoms_given):
         inp=""
+	ans=['no','yes']
         if syms not in ip.keys():
             ip[syms]="done"
             return "Are you experiencing any "+syms+" ? : "+"/n provide proper answers i.e. (yes/no) : "
         else:
             continue
 	
-	ans=['no','yes']
+	
         inp=request.args.get('msg')
         while inp.lower() not in ans:
-	    inp = input("provide proper answers i.e. (yes/no)")
-            if(inp.lower()=="yes"):
-            	symptoms_exp.append(syms)
+	   inp = input("provide proper answers i.e. (yes/no)")
+        if(inp.lower()=="yes"):
+           symptoms_exp.append(syms)
 		
     second_prediction=sec_predict(symptoms_exp)
     calc_condition(symptoms_exp,num_days)
