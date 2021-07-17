@@ -136,6 +136,9 @@ def print_disease(node):
     disease = le.inverse_transform(val[0])
     return disease
 	
+@app.route("/")
+def index():
+   return "Welcome to the first version of HygeAI healthcare chatbot!"	
 
 @app.route("/get")
 def get_bot_response():
