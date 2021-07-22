@@ -212,9 +212,9 @@ def get_bot_response():
             continue
 	
         inp=request.args.get('msg')
-        if (inp.lower()!="yes" or inp.lower()!="no"):
-            return "Provide proper answers i.e. (yes/no) : NOT "+ inp
-	if (inp.lower()=="yes"):
+        if(inp.lower()!="yes" or inp.lower()!="no"):
+             return "Provide proper answers i.e. (yes/no) Not " + inp
+	if(inp.lower()=="yes"):
             symptoms_exp.append(syms)
 	
     second_prediction=sec_predict(symptoms_exp)
