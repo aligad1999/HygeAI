@@ -224,11 +224,9 @@ def get_bot_response():
         shrad+=str(i+1)+")"+j+"\n"
     if(present_disease[0]==second_prediction[0]):
         return "You may have "+ present_disease[0]+"\n"+description_list[present_disease[0]]+" Take following measures : " + shrad + "\nThank you for using HygeAI chatbot!\n"
-	break
 		
     else:
         return "You may have "+ present_disease[0]+ "or "+ second_prediction[0]+"\n"+description_list[present_disease[0]]+"\n"+description_list[second_prediction[0]]+"\nTake following measures : \n"+ shrad + "\nThank you for using HygeAI chatbot!"          
-	break
 node=0
 
 def recurse(n, depth,tree_,feature_name,disease_input):
