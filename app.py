@@ -213,7 +213,7 @@ def get_bot_response():
 	
         inp=request.args.get('msg')
         if (inp.lower()!="yes" or inp.lower()!="no"):
-            return "Provide proper answers i.e. (yes/no) : "
+            return "Provide proper answers i.e. (yes/no) : NOT "+ inp
 	if (inp.lower()=="yes"):
             symptoms_exp.append(syms)
 	
@@ -223,20 +223,12 @@ def get_bot_response():
     for  i,j in enumerate(precution_list):
         shrad+=str(i+1)+")"+j+"\n"
     if(present_disease[0]==second_prediction[0]):
-        return "You may have "+ present_disease[0]+"\n"+description_list[present_disease[0]]+" Take following measures : " + shrad + "\nThank you for using HygeAI chatbot!\nWanna start a new chat?!\n1) Yes\n2) No"
-	inp=request.args.get('msg')
-	if (inp.lower()=="yes"):
-            get_bot_response()
-	else:
-	    break
+        return "You may have "+ present_disease[0]+"\n"+description_list[present_disease[0]]+" Take following measures : " + shrad + "\nThank you for using HygeAI chatbot!\n"
+	break
 		
     else:
-        return "You may have "+ present_disease[0]+ "or "+ second_prediction[0]+"\n"+description_list[present_disease[0]]+"\n"+description_list[second_prediction[0]]+"\nTake following measures : \n"+ shrad + "\nThank you for using HygeAI chatbot!\nWanna start a new chat?!\n1) Yes\n2) No"          
-	inp=request.args.get('msg')
-	if (inp.lower()=="yes"):
-            get_bot_response()
-	else:
-	    break
+        return "You may have "+ present_disease[0]+ "or "+ second_prediction[0]+"\n"+description_list[present_disease[0]]+"\n"+description_list[second_prediction[0]]+"\nTake following measures : \n"+ shrad + "\nThank you for using HygeAI chatbot!"          
+	break
 node=0
 
 def recurse(n, depth,tree_,feature_name,disease_input):
