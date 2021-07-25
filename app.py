@@ -222,7 +222,7 @@ def get_bot_response():
     vir=list(symptoms_given)       
     for syms in list(symptoms_given):
 	
-	syms = syms.replace('_',' ')
+	  syms = syms.replace('_',' ')
         inp=""
         if syms not in ip.keys():
             ip[syms]="done"
