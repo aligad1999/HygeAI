@@ -10,7 +10,7 @@ import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 from flask import Flask, render_template, request
 import random
-pip install python-google-places
+!pip install python-google-places
 from googleplaces import GooglePlaces, types, lang
 import requests
 import json
