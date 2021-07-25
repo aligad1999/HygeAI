@@ -10,6 +10,10 @@ import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 from flask import Flask, render_template, request
 import random
+from googleplaces import GooglePlaces, types, lang
+import requests
+import json
+
 l=[]
 app = Flask(__name__)
 app.config["CACHE_TYPE"]="null"
@@ -39,17 +43,6 @@ model.fit(x_train,y_train)
 importances = clf.feature_importances_
 indices = np.argsort(importances)[::-1]
 features = cols
-
-def readn(nstr):
-    engine = pyttsx3.init()
-
-    engine.setProperty('voice', "english+f5")
-    engine.setProperty('rate', 130)
-
-    engine.say(nstr)
-    engine.runAndWait()
-    engine.stop()
-
 
 severityDictionary=dict()
 description_list = dict()
@@ -135,7 +128,27 @@ def print_disease(node):
     val  = node.nonzero() 
     disease = le.inverse_transform(val[0])
     return disease
-	
+
+@app.route("/gethospital")
+def hospital():
+  userlat_lng = request.args.get('msg')	
+  latlngList = userlat_lng.split(' ')
+  # Use your own API key for making api request calls
+  API_KEY = 'AIzaSyC6-gwhsbRMAbtSNhR56y2EBV9S16bZhHE'
+  # Initialising the GooglePlaces constructor
+  google_places = GooglePlaces(API_KEY)
+
+  query_result = google_places.nearby_search(
+      lat_lng ={'lat': latlngList[0]
+, 'lng': latlngList[1]},
+      radius = 1000,
+      types =[types.TYPE_HOSPITAL])
+
+  # Iterate over the search results
+  for place in query_result.places:
+    return "the nearest hospital to you is " + place.name
+
+
 @app.route("/")
 def index():
    return "Welcome to the first version of HygeAI healthcare chatbot!"	
