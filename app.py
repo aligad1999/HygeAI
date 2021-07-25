@@ -10,7 +10,8 @@ import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 from flask import Flask, render_template, request
 import random
-from googleplaces import GooglePlaces, types, lang
+#pip install python-google-places
+#from googleplaces import GooglePlaces, types, lang
 import requests
 import json
 
@@ -129,6 +130,8 @@ def print_disease(node):
     disease = le.inverse_transform(val[0])
     return disease
 
+"""
+
 @app.route("/gethospital")
 def hospital():
   userlat_lng = request.args.get('msg')	
@@ -147,6 +150,7 @@ def hospital():
   # Iterate over the search results
   for place in query_result.places:
     return "the nearest hospital to you is " + place.name
+"""
 
 
 @app.route("/")
