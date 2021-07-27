@@ -225,7 +225,7 @@ def get_bot_response():
         inp=""
         if syms not in ip.keys():
             ip[syms]="done"
-            return "Are you experiencing any "+syms+" ? : "+"\nProvide proper answers i.e. (yes/no) : "
+            return "Are you experiencing any " + syms.replace('_',' ') + " ? : "+"\nProvide proper answers i.e. (yes/no) : "
         else:
             continue
 	
